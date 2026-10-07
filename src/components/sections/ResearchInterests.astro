@@ -1,0 +1,12 @@
+---
+import Section from "../Section.astro";
+const { researchInterests = [], title } = Astro.props;
+---
+
+<Section id="research-interests" title={title}>
+	<div class="flex flex-wrap gap-2 text-[14px] leading-6 text-skin-base">
+		{researchInterests.map((interest, index) => (
+			<span class:list={["rounded-full border px-3 py-1", index < 4 ? "border-skin-hue/30 bg-skin-hue/10 font-medium" : "border-skin-muted/30 text-skin-muted"]}>{interest}</span>
+		))}
+	</div>
+</Section>

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind CSS 4 - Dynamic Theme System
+ * Using @theme inline for runtime CSS variable resolution
+ */
+
+/* Define skin colors as theme tokens that reference CSS variables */
+@theme inline {
+  --color-skin-base: var(--color-text-base);
+  --color-skin-muted: var(--color-text-muted);
+  --color-skin-inverted: var(--color-text-inverted);
+  --color-skin-fill: var(--color-fill);
+  --color-skin-hue: var(--color-accent);
+  --color-skin-hues: var(--color-accent);
+  --color-skin-button-accent: var(--color-button-accent);
+  --color-skin-button-accent-hover: var(--color-button-accent-hover);
+  --color-skin-button-muted: var(--color-button-muted);
+}
+
+/* ============================================
+   LIGHT MODE - Default Theme
+   ============================================ */
+:root {
+  --color-text-base: #000000;
+  --color-text-muted: #787878;
+  --color-text-inverted: #ffffff;
+  --color-link: #52525b;
+  --color-link-hover: #18181b;
+  --color-link-underline: #a1a1aa;
+  --color-fill: #f5f5f5;
+  --color-muted: #c8c8c8;
+  --color-accent: #52525b;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #27272a;
+  --color-button-muted: #eeeeef;
+}
+
+/* Blue Theme - Light */
+:root [data-theme="blue"] {
+  --color-text-base: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-inverted: #ffffff;
+  --color-fill: #f4f4f5;
+  --color-muted: #d4d4d8;
+  --color-accent: #52525b;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #27272a;
+  --color-button-muted: #eeeeef;
+}
+
+/* Red Theme - Light */
+:root [data-theme="red"] {
+  --color-text-base: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-inverted: #ffffff;
+  --color-fill: #f4f4f5;
+  --color-muted: #d4d4d8;
+  --color-accent: #52525b;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #27272a;
+  --color-button-muted: #eeeeef;
+}
+
+/* Green Theme - Light */
+:root [data-theme="green"] {
+  --color-text-base: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-inverted: #ffffff;
+  --color-fill: #f4f4f5;
+  --color-muted: #d4d4d8;
+  --color-accent: #52525b;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #27272a;
+  --color-button-muted: #eeeeef;
+}
+
+/* Cyber Theme - Light */
+:root [data-theme="cyber"] {
+  --color-text-base: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-inverted: #ffffff;
+  --color-fill: #f4f4f5;
+  --color-muted: #d4d4d8;
+  --color-accent: #52525b;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #27272a;
+  --color-button-muted: #eeeeef;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+.dark {
+  --color-text-base: #ffffff;
+  --color-text-muted: #969696;
+  --color-text-inverted: #ffffff;
+  --color-link: #d4d4d8;
+  --color-link-hover: #ffffff;
+  --color-link-underline: #a1a1aa;
+  --color-fill: #121212;
+  --color-muted: #242424;
+  --color-accent: #a1a1aa;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #71717a;
+  --color-button-muted: #27272a;
+}
+
+/* Blue Theme - Dark */
+.dark [data-theme="blue"] {
+  --color-text-base: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-text-inverted: #ffffff;
+  --color-fill: #09090b;
+  --color-muted: #3f3f46;
+  --color-accent: #a1a1aa;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #71717a;
+  --color-button-muted: #27272a;
+}
+
+/* Red Theme - Dark */
+.dark [data-theme="red"] {
+  --color-text-base: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-text-inverted: #ffffff;
+  --color-fill: #09090b;
+  --color-muted: #3f3f46;
+  --color-accent: #a1a1aa;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #71717a;
+  --color-button-muted: #27272a;
+}
+
+/* Green Theme - Dark */
+.dark [data-theme="green"] {
+  --color-text-base: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-text-inverted: #ffffff;
+  --color-fill: #09090b;
+  --color-muted: #3f3f46;
+  --color-accent: #a1a1aa;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #71717a;
+  --color-button-muted: #27272a;
+}
+
+/* Cyber Theme - Dark */
+.dark [data-theme="cyber"] {
+  --color-text-base: #f4f4f5;
+  --color-text-muted: #7d7d7d;
+  --color-text-inverted: #f0f0f0;
+  --color-fill: #09090b;
+  --color-muted: #3f3f46;
+  --color-accent: #a1a1aa;
+  --color-button-accent: #52525b;
+  --color-button-accent-hover: #71717a;
+  --color-button-muted: #27272a;
+}

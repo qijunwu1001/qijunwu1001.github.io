@@ -1,0 +1,86 @@
+---
+const { sections = [], contentsLabel = "Contents" } = Astro.props;
+---
+
+<nav class="no-print" aria-label="Resume navigation" data-resume-toc>
+	<p class="mb-2 text-[11px] font-semibold tracking-[0.16em] text-skin-muted">{contentsLabel}</p>
+	<ul class="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3 lg:grid-cols-1 lg:gap-1">
+		{sections.map(({ id, label }, index) => (
+			<li>
+				<a
+					href={`#${id}`}
+					data-toc-link={id}
+					class:list={["toc-link flex items-center gap-2 py-1.5 text-[13px] transition-colors", index === 0 && "is-active"]}
+					aria-current={index === 0 ? "location" : undefined}
+				>
+					<span class="toc-indicator" aria-hidden="true"></span>
+					<span>{label}</span>
+				</a>
+			</li>
+		))}
+	</ul>
+</nav>
+
+<script>
+	const content = document.querySelector<HTMLElement>("[data-resume-content]");
+	const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-section]"));
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"));
+
+	const setActive = (id: string) => {
+		for (const link of links) {
+			const active = link.dataset.tocLink === id;
+			link.classList.toggle("is-active", active);
+			if (active) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		}
+	};
+
+	const updateActiveSection = () => {
+		const desktop = window.matchMedia("(min-width: 1024px)").matches;
+		const line = (desktop ? content?.getBoundingClientRect().top ?? 0 : 0) + 120;
+		let current = sections[0];
+
+		for (const section of sections) {
+			if (section.getBoundingClientRect().top <= line) current = section;
+			else break;
+		}
+
+		if (current) setActive(current.id);
+	};
+
+	const onScroll = () => requestAnimationFrame(updateActiveSection);
+	content?.addEventListener("scroll", onScroll, { passive: true });
+	window.addEventListener("scroll", onScroll, { passive: true });
+	window.addEventListener("resize", updateActiveSection);
+	updateActiveSection();
+</script>
+
+<style>
+	.toc-link {
+		color: var(--color-text-muted);
+	}
+
+	.toc-link:hover,
+	.toc-link.is-active {
+		color: var(--color-text-base);
+	}
+
+	.toc-link.is-active {
+		font-weight: 600;
+	}
+
+	.toc-indicator {
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 999px;
+		background-color: var(--color-muted);
+		transition: all 150ms ease;
+	}
+
+	.toc-link.is-active .toc-indicator {
+		width: 0.8rem;
+		height: 2px;
+		border-radius: 0;
+		background-color: var(--color-text-base);
+	}
+</style>

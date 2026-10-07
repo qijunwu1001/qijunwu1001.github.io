@@ -1,0 +1,280 @@
+---
+import Section from "@/components/Section.astro";
+import Mail from "@/icons/Mail.astro";
+import X from "@/icons/X.astro";
+import LinkedIn from "@/icons/LinkedIn.astro";
+import GitHub from "@/icons/GitHub.astro";
+import WorldMap from "@/icons/WorldMap.astro";
+import type { SocialIcon } from "@/types";
+
+const { basics, cvHref, cvLabel, emailLabel, portraitLabel } = Astro.props;
+const { name, image, location, email } = basics;
+const profiles = basics.profiles as Array<{ network: string; username: string; url: string }>;
+const { city, region } = location ?? {};
+const imageSrc = image && (image.startsWith("http") ? image : `${import.meta.env.BASE_URL}${image.replace(/^\/+/, "")}`);
+
+const SOCIAL_ICONS: SocialIcon = {
+	GitHub,
+	LinkedIn,
+	X,
+};
+
+const profileLabels = profiles.map(({ network, username }) => network === "GitHub" ? `github.com/${username}` : `${network}: ${username}`);
+const printInfo = [email, ...profileLabels].filter(Boolean).join(" • ");
+---
+
+<Section>
+	<div class="flex flex-col-reverse gap-8">
+		<div class="info">
+			<h1>{name}</h1>
+			{(city || region) && <div class="flex items-center gap-2 pt-2 text-[13px] text-skin-muted">
+				<WorldMap />
+				{[city, region].filter(Boolean).join(" · ")}
+			</div>}
+			{printInfo && <footer class="print">{printInfo}</footer>}
+			<footer class="no-print contact-links">
+				{email && (
+					<a href={`mailto:${email}`} title={`${emailLabel}: ${email}`} class="contact-link">
+						<Mail />
+						<span>{email}</span>
+					</a>
+				)}
+				{
+					profiles.map(({ network, username, url }) => {
+						const Icon = SOCIAL_ICONS[network];
+
+						return (
+							<a href={url} title={`Visit ${name}'s ${network} profile`} class="contact-link" target="_blank" rel="noopener noreferrer">
+								<Icon />
+								<span>{network === "GitHub" ? `github.com/${username}` : `${network}: ${username}`}</span>
+							</a>
+						);
+					})
+				}
+			</footer>
+			<div class="profile-actions no-print">
+				<a class="cv-link" href={cvHref} target="_blank" rel="noopener noreferrer">
+					<span>{cvLabel}</span>
+					<svg aria-hidden="true" viewBox="0 0 20 20" fill="none" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg">
+						<path d="M5.5 10h9m0 0-3.5-3.5M14.5 10 11 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+				<slot />
+			</div>
+		</div>
+		{imageSrc && <figure class="print:hidden w-fit relative">
+			<img class="rounded-xl object-cover" src={imageSrc} alt={`${portraitLabel}: ${name}`} />
+		</figure>}
+	</div>
+</Section>
+
+<style>
+	.info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding-right: 2rem;
+	}
+
+	@media print {
+		.info {
+			gap: 0;
+			padding-right: 0;
+		}
+	}
+
+	h1 {
+		font-size: 2.125rem;
+		line-height: 2.375rem;
+		font-weight: 700;
+	}
+
+	@media print {
+		h1 {
+			font-size: 1.75rem;
+			line-height: 2rem;
+		}
+	}
+
+	h2 {
+		text-wrap: balance;
+		font-size: 0.9375rem;
+		line-height: 1.375rem;
+		color: var(--color-text-muted);
+	}
+
+	@media print {
+		h2 {
+			font-size: 1rem;
+			line-height: 1.5rem;
+		}
+	}
+
+	img {
+		aspect-ratio: 2 / 3;
+		width: 8rem;
+		object-fit: cover;
+		object-position: center;
+		border-radius: 1rem;
+	}
+
+	span {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		font-size: 0.6875rem;
+		line-height: 0.9375rem;
+		color: var(--color-accent);
+	}
+
+	footer {
+		margin-top: 0.5rem;
+		display: flex;
+		gap: 0.25rem;
+		font-size: 0.8125rem;
+		line-height: 1.125rem;
+	}
+
+	footer a, footer button {
+		display: inline-flex;
+		width: 2rem;
+		height: 2rem;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.375rem;
+		padding: 0.25rem;
+		transition-property: all;
+		transition-timing-function: linear;
+		transition-duration: 500ms;
+		color: var(--color-accent);
+	}
+
+	footer a:hover, footer button:hover {
+		background-color: var(--color-button-accent);
+		color: var(--color-text-inverted);
+	}
+
+	footer.contact-links {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 0.125rem;
+		font-size: 0.75rem;
+		line-height: 1.125rem;
+	}
+
+	footer.contact-links a.contact-link {
+		display: grid;
+		width: fit-content;
+		grid-template-columns: 1rem auto;
+		align-items: center;
+		justify-content: start;
+		column-gap: 0.5rem;
+		padding: 0.25rem 0;
+		color: var(--color-link);
+	}
+
+	footer.contact-links a.contact-link:hover {
+		background-color: transparent;
+		color: var(--color-link-hover);
+		text-decoration: underline;
+		text-underline-offset: 0.2rem;
+	}
+
+	footer.contact-links span {
+		display: block;
+		align-items: initial;
+		gap: 0;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
+
+	footer.contact-links svg {
+		display: block;
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.cv-link {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 0;
+		border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+		border-radius: 999px;
+		padding: 0.5rem 0.9rem;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		color: var(--color-text-base);
+		transition: background-color 150ms ease, border-color 150ms ease;
+	}
+
+	.profile-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 0.75rem;
+	}
+
+	.cv-link:hover {
+		border-color: var(--color-accent);
+		background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+	}
+
+	.cv-link span {
+		display: inline;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
+
+	@media (width <= 700px) {
+		.container {
+			flex-direction: column-reverse;
+		}
+
+		.info {
+			padding-right: 0;
+		}
+
+		h2 {
+			text-wrap: balance;
+		}
+	}
+
+	@media (min-width: 768px) {
+		@media (width <= 700px) {
+			.info {
+				align-items: center;
+				justify-content: center;
+			}
+
+			figure {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+</style>
+
+<script>
+	// Handle print mode - remove dark theme when printing
+	const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+	window.addEventListener("beforeprint", () => {
+		document.documentElement.classList.remove("dark");
+	});
+
+	window.addEventListener("afterprint", () => {
+		const savedTheme = localStorage.getItem("theme") || "system";
+		const effectiveTheme = savedTheme === "system" ? systemTheme : savedTheme;
+		if (effectiveTheme === "dark") {
+			document.documentElement.classList.add("dark");
+		}
+	});
+</script>

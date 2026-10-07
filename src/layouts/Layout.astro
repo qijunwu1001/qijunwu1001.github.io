@@ -1,0 +1,208 @@
+---
+import Vengeance from "@/layouts/Vengeance.astro";
+import "@/styles/global.css";
+
+interface Props {
+	title: string;
+	summary: string;
+	theme: string;
+	image: string;
+	lang: string;
+}
+
+const { title, summary, theme, image, lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site?.toString() ?? Astro.url.origin;
+const imageSrc = image && (image.startsWith("http") ? image : `${base}${image.replace(/^\/+/, "")}`);
+const imageMetaUrl = imageSrc ? new URL(imageSrc, Astro.site ?? Astro.url).toString() : "";
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title}</title>
+		<meta name="description" content={summary} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg?v=2`} />
+		{imageSrc && <link rel="preload" as="image" href={imageSrc} />}
+
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={summary} />
+		<meta property="og:image" content={imageMetaUrl} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta property="twitter:domain" content={siteUrl.split("//")[1] ?? ""} />
+		<meta property="twitter:url" content={siteUrl} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={summary} />
+		<meta name="twitter:image" content={imageMetaUrl} />
+
+		<Vengeance />
+	</head>
+	<body data-theme={theme} class="relative bg-skin-fill">
+		<div class="absolute top-0 -z-10 h-full w-full print:hidden">
+			<div class="bg-skin-hue/10 absolute bottom-auto left-[20%] right-auto top-0 h-[200px] w-[200px] -translate-x-[30%] translate-y-[20%] rounded-full blur-[80px] invert-0 dark:bg-white/5"></div>
+		</div>
+		<slot />
+		<style is:global>
+			body,
+			figure {
+				margin: 0;
+				padding: 0;
+			}
+
+		body {
+			font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+			color: var(--color-text-base);
+			font-kerning: normal;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		html[lang="zh-CN"] body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		html[lang="zh-CN"] h1,
+		html[lang="zh-CN"] h2,
+		html[lang="zh-CN"] h3,
+		html[lang="zh-CN"] h4 {
+			letter-spacing: 0;
+		}
+
+		html[lang="zh-CN"] .resume-content > :not(:first-child) {
+			margin-block-start: 1.5rem !important;
+		}
+
+			a {
+				text-decoration: none;
+			}
+
+		.resume-content a {
+			color: var(--color-link);
+			text-decoration: underline;
+			text-decoration-color: var(--color-link-underline);
+			text-decoration-style: dotted;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.22em;
+			transition: color 150ms ease, text-decoration-color 150ms ease;
+		}
+
+		.resume-content a:hover,
+		.resume-content a:focus-visible {
+			color: var(--color-link-hover);
+			text-decoration-color: currentColor;
+			text-decoration-style: solid;
+		}
+
+		ul:not(.list-disc):not(.list-decimal) {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4 {
+				color: var(--color-text-base);
+				margin: 0;
+				font-family: inherit;
+				letter-spacing: -0.02em;
+			}
+
+			p { text-wrap: pretty; }
+
+			.print {
+				display: none !important;
+			}
+
+			.dev * {
+				border: 1px solid rgb(239 68 68 / 0.5);
+				background-color: rgb(239 68 68 / 0.05);
+			}
+
+			@media print {
+				.no-print {
+					display: none !important;
+				}
+
+				.print {
+					display: block !important;
+				}
+
+				astro-dev-toolbar {
+					display: none !important;
+				}
+
+				article {
+					break-inside: avoid;
+				}
+			}
+		</style>
+
+		<script>
+			import Alpine from "alpinejs";
+			import collapse from "@alpinejs/collapse";
+
+			Alpine.plugin(collapse);
+
+			// Theme selector component
+			Alpine.data("themeSelector", () => ({
+				open: false,
+				currentTheme: "system",
+				themes: [
+					{ value: "system", label: "System", icon: "computer" },
+					{ value: "light", label: "Light", icon: "sun" },
+					{ value: "dark", label: "Dark", icon: "moon" },
+				],
+
+				init() {
+					const savedTheme = localStorage.getItem("theme");
+					this.currentTheme = savedTheme || "system";
+					this.applyTheme(this.currentTheme);
+
+					window
+						.matchMedia("(prefers-color-scheme: dark)")
+						.addEventListener("change", () => {
+							if (this.currentTheme === "system") {
+								this.applyTheme("system");
+							}
+						});
+				},
+
+				selectTheme(value: string) {
+					this.currentTheme = value;
+					this.applyTheme(value);
+					localStorage.setItem("theme", value);
+					this.open = false;
+				},
+
+				applyTheme(value: string) {
+					const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+						.matches
+						? "dark"
+						: "light";
+					const theme = value === "system" ? systemTheme : value;
+					document.documentElement.classList.remove("light", "dark");
+					document.documentElement.classList.add(theme);
+				},
+			}));
+
+			Alpine.start();
+		</script>
+	</body>
+</html>

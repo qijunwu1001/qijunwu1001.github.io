@@ -1,0 +1,13 @@
+---
+import Section from "../Section.astro";
+
+const { aboutMe = [], title } = Astro.props;
+---
+
+<Section id="about" title={title}>
+	<div class="flex max-w-[72ch] flex-col gap-3 text-[15px] leading-6 text-skin-muted">
+		{aboutMe.map((paragraph, index) => (
+			<p class={index === 0 ? "font-normal text-skin-base" : ""}>{paragraph}</p>
+		))}
+	</div>
+</Section>

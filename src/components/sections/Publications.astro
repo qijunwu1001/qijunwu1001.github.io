@@ -1,0 +1,32 @@
+---
+import Section from "../Section.astro";
+const { publications = [], manuscriptsUnderReview = [], manuscriptsFirst = false, title } = Astro.props;
+---
+
+{publications.length > 0 && (
+	<Section id="publications" className={Astro.props.className} title={title}>
+		<ul class="-ml-4 flex list-disc flex-col gap-4 pl-4 text-[15px] leading-6 text-skin-base sm:-ml-5 sm:pl-5">
+			{manuscriptsFirst && manuscriptsUnderReview.map(({ authors, name, year, journal, status }) => (
+				<li>
+					<span>{authors.map((author, index) => (
+						<>{index > 0 && ", "}{author.isSelf ? <strong class="font-semibold text-skin-base">{author.name}</strong> : author.name}</>
+					))}</span> ({year}). <span class="font-normal text-skin-base">{name}</span>. <em>{journal}</em> ({status}).
+				</li>
+			))}
+			{publications.map(({ authors, name, publisher, volume, issue, pages, releaseDate, url, doi }) => (
+				<li>
+					<span>{authors.map((author, index) => (
+						<>{index > 0 && ", "}{author.isSelf ? <strong class="font-semibold text-skin-base">{author.name}</strong> : author.name}</>
+					))}</span> ({new Date(releaseDate).getFullYear()}). <span class="font-normal text-skin-base">{name}</span>. <em>{publisher}</em> {volume}({issue}):{pages}. DOI: <a class="underline underline-offset-2 decoration-skin-muted/70 hover:decoration-solid" href={url} target="_blank" rel="noopener noreferrer">{doi}</a>
+				</li>
+			))}
+			{!manuscriptsFirst && manuscriptsUnderReview.map(({ authors, name, year, journal, status }) => (
+				<li>
+					<span>{authors.map((author, index) => (
+						<>{index > 0 && ", "}{author.isSelf ? <strong class="font-semibold text-skin-base">{author.name}</strong> : author.name}</>
+					))}</span> ({year}). <span class="font-normal text-skin-base">{name}</span>. <em>{journal}</em> ({status}).
+				</li>
+			))}
+		</ul>
+	</Section>
+)}

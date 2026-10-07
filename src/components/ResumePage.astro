@@ -1,0 +1,107 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import About from "@/components/sections/About.astro";
+import Education from "@/components/sections/Education.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Publications from "@/components/sections/Publications.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Projects from "@/components/sections/Projects.astro";
+import Skills from "@/components/sections/Skills.astro";
+import Awards from "@/components/sections/Awards.astro";
+import SidebarNav from "@/components/SidebarNav.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+
+const { locale, cv } = Astro.props;
+const isChinese = locale === "zh-CN";
+const { basics } = cv;
+const base = import.meta.env.BASE_URL;
+const ui = isChinese
+	? {
+		siteTitle: "吴启俊 | 学术主页",
+		about: "简介",
+		projects: "项目",
+		research: "研究经历",
+		publications: "论文发表与投稿",
+		education: "教育背景",
+		skills: "技能与工具",
+		awards: "荣誉与奖励",
+		contents: "目录",
+		viewProject: "查看项目",
+		viewResume: "查看中文简历 PDF",
+		email: "电子邮件",
+		portrait: "个人照片",
+		certificate: "证书",
+		sections: [
+			{ id: "about", label: "简介" },
+			{ id: "education", label: "教育背景" },
+			{ id: "research", label: "研究经历" },
+			{ id: "publications", label: "论文发表与投稿" },
+			{ id: "projects", label: "项目" },
+			{ id: "skills", label: "技能与工具" },
+			{ id: "awards", label: "荣誉与奖励" },
+		],
+	}
+	: {
+		siteTitle: "Qijun Wu | Research Portfolio",
+		about: "About Me",
+		projects: "Projects",
+		research: "Research Experience",
+		publications: "Publications",
+		education: "Education",
+		skills: "Skills & Tools",
+		awards: "Honors & Awards",
+		contents: "Contents",
+		viewProject: "View project",
+		viewResume: "View Resume PDF",
+		email: "Email",
+		portrait: "Portrait",
+		certificate: "Certificates",
+		sections: [
+			{ id: "about", label: "About Me" },
+			{ id: "education", label: "Education" },
+			{ id: "research", label: "Research Experience" },
+			{ id: "publications", label: "Publications" },
+			{ id: "projects", label: "Projects" },
+			{ id: "skills", label: "Skills & Tools" },
+			{ id: "awards", label: "Honors & Awards" },
+		],
+	};
+---
+
+<Layout title={ui.siteTitle} summary={basics.summary} theme={basics.theme} image={basics.image} lang={locale}>
+	<main class="relative mx-auto grid max-w-6xl gap-12 p-8 max-sm:py-10 lg:h-screen lg:grid-cols-6 lg:gap-12 lg:overflow-hidden lg:px-12 lg:py-8 xl:gap-16 print:h-auto print:max-w-none print:grid-cols-1 print:gap-6 print:overflow-visible">
+		<aside class="space-y-6 lg:col-span-2 lg:flex lg:h-full lg:flex-col lg:justify-center lg:pl-6 lg:translate-x-16 lg:-translate-y-7 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0 print:translate-x-0 print:translate-y-0">
+			<Hero basics={basics} cvHref={`${base}${isChinese ? "resume_zh.pdf" : "resume_en.pdf"}`} cvLabel={ui.viewResume} emailLabel={ui.email} portraitLabel={ui.portrait}>
+				<LanguageSwitcher locale={locale} />
+			</Hero>
+			<SidebarNav sections={ui.sections} contentsLabel={ui.contents} />
+		</aside>
+		<div data-resume-content class="resume-content min-w-0 space-y-8 lg:col-span-4 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:scroll-smooth lg:py-2 lg:pr-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0 print:overflow-visible">
+			<About aboutMe={basics.aboutMe} title={ui.about} />
+			<Education education={cv.education} certificates={cv.certificates} title={ui.education} certificateTitle={ui.certificate} logoLabel={isChinese ? "校徽" : "logo"} />
+			<Experience work={cv.work} title={ui.research} className="print:col-span-3" />
+			<Publications publications={cv.publications} manuscriptsUnderReview={cv.manuscriptsUnderReview} manuscriptsFirst={true} title={ui.publications} />
+			<Projects projects={cv.projects} title={ui.projects} viewLabel={ui.viewProject} />
+			<Skills skills={cv.skills} title={ui.skills} />
+			<Awards awards={cv.awards} title={ui.awards} />
+		</div>
+	</main>
+
+	<style>
+		@page {
+			size: auto;
+			margin: 0mm;
+		}
+		main {
+			margin: auto;
+			width: 100%;
+		}
+		.resume-content {
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+		}
+		.resume-content::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</Layout>

@@ -1,0 +1,26 @@
+---
+const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const options = [
+	{ code: "en", label: "EN", href: base },
+	{ code: "zh-CN", label: "中文", href: `${base}zh/` },
+];
+---
+
+<nav class="no-print w-fit" aria-label={locale === "zh-CN" ? "语言选择" : "Language selection"}>
+	<div class="inline-flex items-center gap-1 rounded-full border border-skin-muted/30 p-1 text-[12px]">
+		{options.map(({ code, label, href }) => (
+			<a
+				href={href}
+				lang={code}
+				aria-current={locale === code ? "page" : undefined}
+				class:list={[
+					"rounded-full px-3 py-1 transition-colors",
+					locale === code ? "bg-skin-hue/10 font-semibold text-skin-base" : "text-skin-muted hover:text-skin-base",
+				]}
+			>
+				{label}
+			</a>
+		))}
+	</div>
+</nav>

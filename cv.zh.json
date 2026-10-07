@@ -1,0 +1,161 @@
+{
+  "basics": {
+    "name": "吴启俊",
+    "image": "profile.jpg",
+    "email": "wuqijun1001@163.com",
+    "phone": "",
+    "url": "",
+    "summary": "我目前就读于广州大学统计学专业，已获得深圳大学应用统计专业保送资格。研究领域包括 AI for Science（AI4S）、AI for Statistics、区间估计和高维统计推断。",
+    "aboutMe": [
+      "我目前就读于广州大学统计学专业，已获得深圳大学应用统计专业保送资格。",
+      "研究领域包括 AI for Science（AI4S）、AI for Statistics、区间估计和高维统计推断。",
+      "科研工作涉及高维两样本 Behrens–Fisher 功效增强检验、约束参数无先验概率区间估计，以及未知背景下泊松信号的精确区间估计。"
+    ],
+    "theme": "default",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "",
+      "countryCode": "",
+      "region": ""
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "01seven",
+        "url": "https://github.com/01seven"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "高维两样本 Behrens–Fisher 问题的功效增强检验",
+      "startDate": "2025-09-01",
+      "endDate": null,
+      "summary": "面向稀疏、稠密及尺度异质信号，研究高维两样本 Behrens–Fisher 问题的功效增强检验。",
+      "responsibilities": [
+        "结合 Welch’s t 检验与 Cauchy 组合检验方法构建 WCCT，并提出 EWCCT 和 EWCCTS，面向稀疏、稠密及尺度异质信号。",
+        "设计模拟研究并开展真实数据分析，比较小至中等样本量下所提方法和现有方法的第一类错误率控制与经验检验功效。",
+        "所提方法能够控制第一类错误率，且 EWCCTS 方法具有竞争性的功效。",
+        "主要负责方法提出、理论推导、实验设计、结果分析与论文初稿撰写。"
+      ],
+      "skills": ["高维统计", "假设检验", "R"]
+    },
+    {
+      "name": "约束参数的无先验概率区间估计",
+      "startDate": "2025-07-01",
+      "endDate": "2026-06-30",
+      "summary": "针对含干扰参数的约束正态均值和泊松均值，开发无先验推断模型（IM/NIM）区间估计方法。",
+      "responsibilities": [
+        "正态均值下，IM 方法达到精确覆盖率，区间略长于贝叶斯方法；泊松均值下，IM 方法较保守，NIM 方法的覆盖率最接近名义置信水平。",
+        "主要负责方法实现，分析中微子质量与信号强度数据，并撰写论文初稿。"
+      ],
+      "skills": ["统计推断", "区间估计", "Python", "R"]
+    },
+    {
+      "name": "未知背景下泊松信号的精确置信区间",
+      "startDate": "2025-09-01",
+      "endDate": null,
+      "summary": "针对未知背景下泊松信号的区间估计，结合 h 函数、泊松分位数截断和 Berger–Boos 校正提出精确区间估计方法。",
+      "responsibilities": [
+        "通过模拟研究比较区间覆盖率和长度，并分析 KARMEN 中微子探测数据。",
+        "主要负责论文初稿、模拟研究、方法实现与效率优化。"
+      ],
+      "skills": ["统计推断", "区间估计", "R"]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "深圳大学",
+      "url": "https://www.szu.edu.cn/",
+      "logo": "shenzhen-university-logo.png",
+      "logoMode": "crop-left",
+      "area": "应用统计",
+      "studyType": "保送硕士生",
+      "degree": "应用统计（保送）"
+    },
+    {
+      "institution": "广州大学",
+      "url": "https://www.gzhu.edu.cn/",
+      "logo": "guangzhou-university-logo.png",
+      "logoMode": "contain",
+      "area": "统计学",
+      "studyType": "本科",
+      "degree": "统计学学士（预计 2027 年 6 月毕业）",
+      "startDate": "2023-09-01",
+      "endDate": "2027-06-30",
+      "endDateExpected": true,
+      "displayPeriod": "2023 年 9 月 – 2027 年 6 月（预计）"
+    }
+  ],
+  "awards": [
+    { "title": "一等奖学金", "date": "2027 年 1 月", "awarder": "广州大学", "summary": "" },
+    { "title": "第十二届全国大学生统计建模大赛（广东省二等奖）", "date": "2026 年 6 月", "awarder": "", "summary": "" },
+    { "title": "三等奖学金", "date": "2026 年 1 月", "awarder": "广州大学", "summary": "" },
+    { "title": "第十五届 MathorCup 高校数学建模挑战赛（广东省三等奖）", "date": "2025 年 4 月", "awarder": "", "summary": "" },
+    { "title": "第十五届全国大学生数学竞赛（广东省三等奖）", "date": "2023 年 12 月", "awarder": "", "summary": "" }
+  ],
+  "certificates": [],
+  "publications": [
+    {
+      "authors": [
+        { "name": "Lu, H." },
+        { "name": "Wu, Q.", "isSelf": true }
+      ],
+      "name": "Prior-free probabilistic interval estimation for constrained parameters",
+      "publisher": "AIMS Mathematics",
+      "volume": "11",
+      "issue": "6",
+      "pages": "17320–17353",
+      "releaseDate": "2026-06-15",
+      "url": "https://doi.org/10.3934/math.2026709",
+      "doi": "10.3934/math.2026709"
+    }
+  ],
+  "manuscriptsUnderReview": [
+    {
+      "authors": [
+        { "name": "Lu, H." },
+        { "name": "Wu, Q.", "isSelf": true }
+      ],
+      "name": "Power-Enhanced Cauchy Combination Tests for the Two-Sample High-Dimensional Behrens-Fisher Problem",
+      "year": "2026",
+      "journal": "Journal of Multivariate Analysis",
+      "status": "审稿中"
+    },
+    {
+      "authors": [
+        { "name": "Lu, H." },
+        { "name": "Zhao, S." },
+        { "name": "Wu, Q.", "isSelf": true }
+      ],
+      "name": "Optimal exact confidence intervals for Poisson signal with unknown background: A quantile-truncated h-function approach with Berger-Boos correction",
+      "year": "2026",
+      "journal": "Statistical Papers",
+      "status": "大修"
+    }
+  ],
+  "skills": [
+    { "name": "Python", "level": "熟练", "keywords": [] },
+    { "name": "R", "level": "熟练", "keywords": [] },
+    { "name": "高维假设检验", "level": "研究方向", "keywords": [] },
+    { "name": "区间估计", "level": "研究方向", "keywords": [] },
+    { "name": "GPU 蒙特卡洛模拟", "level": "研究应用", "keywords": [] },
+    { "name": "Git/GitHub", "level": "研究应用", "keywords": [] },
+    { "name": "LaTeX", "level": "熟练", "keywords": [] },
+    { "name": "Word", "level": "研究应用", "keywords": [] }
+  ],
+  "languages": [{ "language": "中文", "fluency": "母语" }, { "language": "English", "fluency": "CET-6" }],
+  "interests": [],
+  "references": [],
+  "projects": [
+    {
+      "name": "SimForge-GPU：AI 辅助统计模拟 GPU 迁移与验证",
+      "image": "simforge-gpu-icon.png",
+      "isActive": true,
+      "url": "https://github.com/01seven/simforge-gpu",
+      "github": "https://github.com/01seven/simforge-gpu"
+    }
+  ]
+}
