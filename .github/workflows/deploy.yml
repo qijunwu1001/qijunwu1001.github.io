@@ -29,7 +29,8 @@ jobs:
         id: pages
         shell: bash
         run: |
-          if [[ "${GITHUB_REPOSITORY,,}" == "${GITHUB_REPOSITORY_OWNER,,}.github.io" ]]; then
+          repository_name="${GITHUB_REPOSITORY#*/}"
+          if [[ "${repository_name,,}" == "${GITHUB_REPOSITORY_OWNER,,}.github.io" ]]; then
             echo "base_path=" >> "$GITHUB_OUTPUT"
           else
             echo "base_path=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_OUTPUT"
