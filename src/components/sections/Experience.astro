@@ -1,26 +1,42 @@
 ---
 import Section from "../Section.astro";
-const { work = [], title } = Astro.props;
+const { work = [], title, locale = "en" } = Astro.props;
+
+const formatMonth = (date: string) => {
+	const [year, month] = date.split("-");
+	if (locale === "zh-CN") return `${year}年${Number(month)}月`;
+	return new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(
+		new Date(Date.UTC(Number(year), Number(month) - 1, 1)),
+	);
+};
 ---
 
 <Section id="research" className={Astro.props.className} title={title}>
 	<ul class="-ml-4 flex list-disc flex-col gap-6 pl-4 sm:-ml-5 sm:pl-5">
-		{work.map(({ name, summary, responsibilities }) => (
-			<li>
-				<div class="flex flex-col gap-2">
-					<h3 class="text-[17px] font-normal leading-snug print:text-[13px]">
-						{name}
-					</h3>
-					<div class="mt-1 flex flex-col gap-2 pl-3">
-						{summary && <p class="max-w-[72ch] text-[15px] leading-6 text-skin-muted">{summary}</p>}
-					{responsibilities?.length && (
-							<div class="flex max-w-[72ch] flex-col gap-1 text-[15px] leading-6 text-skin-muted print:text-xs print:leading-5">
-								{responsibilities?.map((item) => <p>{item}</p>)}
-							</div>
-					)}
+		{work.map(({ name, summary, responsibilities, startDate, endDate }) => {
+			const endLabel = endDate ? formatMonth(endDate) : startDate ? (locale === "zh-CN" ? "至今" : "Present") : "";
+			const displayDate = startDate ? `${formatMonth(startDate)} – ${endLabel}` : "";
+
+			return (
+				<li>
+					<div class="flex flex-col gap-2">
+						<div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+							<h3 class="min-w-0 flex-1 text-[17px] font-normal leading-snug print:text-[13px]">
+								{name}
+							</h3>
+							{displayDate && <time class="shrink-0 text-[13px] leading-5 text-skin-muted">{displayDate}</time>}
+						</div>
+						<div class="mt-1 flex flex-col gap-2 pl-3">
+							{summary && <p class="max-w-[72ch] text-[15px] leading-6 text-skin-muted">{summary}</p>}
+							{responsibilities?.length && (
+								<div class="flex max-w-[72ch] flex-col gap-1 text-[15px] leading-6 text-skin-muted print:text-xs print:leading-5">
+									{responsibilities?.map((item) => <p>{item}</p>)}
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-			</li>
-		))}
+				</li>
+			);
+		})}
 	</ul>
 </Section>

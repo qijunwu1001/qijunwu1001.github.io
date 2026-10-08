@@ -4,7 +4,7 @@
     "image": "profile.jpg",
     "email": "wuqijun1001@163.com",
     "phone": "",
-    "url": "",
+    "url": "https://qijunwu1001.github.io/",
     "summary": "我目前就读于广州大学统计学专业，已获得深圳大学应用统计专业保送资格。研究领域包括 AI for Science（AI4S）、AI for Statistics、区间估计和高维统计推断。",
     "aboutMe": [
       "我目前就读于广州大学统计学专业，已获得深圳大学应用统计专业保送资格。",
@@ -19,13 +19,7 @@
       "countryCode": "",
       "region": ""
     },
-    "profiles": [
-      {
-        "network": "GitHub",
-        "username": "01seven",
-        "url": "https://github.com/01seven"
-      }
-    ]
+    "profiles": []
   },
   "work": [
     {
@@ -154,6 +148,7 @@
       "name": "SimForge-GPU：AI 辅助统计模拟 GPU 迁移与验证",
       "image": "simforge-gpu-icon.png",
       "isActive": true,
+      "description": "面向 AI 编程助手与统计模拟程序的本地 GPU 迁移工具。它会先分析脚本并生成转换计划，再将支持范围内使用 CPU 运行的代码保守地改写为使用 GPU 运行的代码，并报告不支持的功能、验证结果和基准测试情况。",
       "url": "https://github.com/01seven/simforge-gpu",
       "github": "https://github.com/01seven/simforge-gpu"
     }

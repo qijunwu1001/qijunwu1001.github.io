@@ -4,12 +4,12 @@
     "image": "profile.jpg",
     "email": "wuqijun1001@163.com",
     "phone": "",
-    "url": "",
-    "summary": "I am completing a B.S. in Statistics at Guangzhou University and have been admitted to Shenzhen University's M.S. program in Applied Statistics through its recommendation-based graduate admission track. My research interests include AI for Science (AI4S), AI for Statistics, high-dimensional statistical inference, and interval estimation.",
+    "url": "https://qijunwu1001.github.io/",
+    "summary": "I am completing a B.S. in Statistics at Guangzhou University and have been admitted to Shenzhen University's M.S. program in Applied Statistics through its recommendation-based admission process. My research interests include AI for Science (AI4S), AI for Statistics, high-dimensional statistical inference, and interval estimation.",
     "aboutMe": [
-      "I am completing a B.S. in Statistics at Guangzhou University and have received recommendation-based admission to Shenzhen University's M.S. program in Applied Statistics.",
-      "My research interests span AI for Science (AI4S), AI for Statistics, high-dimensional inference, and interval estimation. I am especially interested in AI-assisted scientific computing and GPU-based statistical simulations and their validation.",
-      "My work has addressed power-enhanced tests for high-dimensional two-sample Behrens–Fisher problems, prior-free intervals for constrained parameters, and exact intervals for Poisson signals with unknown backgrounds."
+      "I am completing a B.S. in Statistics at Guangzhou University and have been admitted to Shenzhen University's M.S. program in Applied Statistics through its recommendation-based admission process.",
+      "My research interests span AI for Science (AI4S), AI for Statistics, high-dimensional statistical inference, and interval estimation. I am particularly interested in AI-assisted scientific computing, GPU-based statistical simulations, and the validation of computational results.",
+      "My research has focused on power-enhanced tests for high-dimensional two-sample Behrens–Fisher problems, prior-free interval estimation for constrained parameters, and exact interval estimation for Poisson signals with unknown backgrounds."
     ],
     "theme": "default",
     "location": {
@@ -19,13 +19,7 @@
       "countryCode": "",
       "region": ""
     },
-    "profiles": [
-      {
-        "network": "GitHub",
-        "username": "01seven",
-        "url": "https://github.com/01seven"
-      }
-    ]
+    "profiles": []
   },
   "work": [
     {
@@ -34,10 +28,10 @@
       "endDate": null,
       "summary": "Developed power-enhanced Cauchy combination tests for high-dimensional two-sample inference under sparse, dense, and scale-heterogeneous signals.",
       "responsibilities": [
-        "Combined Welch's t-tests with the Cauchy combination method to develop WCCT, and proposed EWCCT and EWCCTS for sparse, dense, and scale-heterogeneous signals.",
-        "Designed simulations and real-data analyses comparing the proposed and existing methods in Type I error control and empirical power.",
-        "The proposed methods controlled Type I error, while EWCCTS achieved competitive power.",
-        "Led method conception, theoretical derivations, experimental design, result analysis, and initial manuscript drafting."
+        "Integrated Welch's t-tests with the Cauchy combination method to develop WCCT, then proposed EWCCT and EWCCTS to address sparse, dense, and scale-heterogeneous signals.",
+        "Designed simulation studies and real-data analyses to compare the proposed methods with existing approaches in terms of Type I error control and empirical power.",
+        "The proposed methods maintained Type I error control, while EWCCTS achieved competitive empirical power.",
+        "Led the conception of the methods, theoretical derivations, experimental design, result analysis, and initial manuscript drafting."
       ],
       "skills": ["High-Dimensional Statistics", "Hypothesis Testing", "R"]
     },
@@ -45,10 +39,10 @@
       "name": "Prior-Free Probabilistic Interval Estimation for Constrained Parameters",
       "startDate": "2025-07-01",
       "endDate": "2026-06-30",
-      "summary": "Developed prior-free inferential-model intervals for constrained normal and Poisson means with nuisance parameters.",
+      "summary": "Developed prior-free interval estimation methods based on inferential models for constrained normal and Poisson means with nuisance parameters.",
       "responsibilities": [
-        "For Normal means, IM achieved exact coverage, with slightly longer intervals than Bayesian methods; for Poisson means, IM was conservative, while NIM coverage was closest to nominal.",
-        "Led method implementation, neutrino-mass and signal-intensity analyses, and initial manuscript drafting."
+        "For normal means, IM achieved exact coverage, with intervals slightly longer than those from Bayesian methods. For Poisson means, IM was conservative, whereas NIM coverage was closest to the nominal level.",
+        "Led method implementation and the analyses of neutrino-mass and signal-intensity data, and drafted the initial manuscript."
       ],
       "skills": ["Statistical Inference", "Interval Estimation", "Python", "R"]
     },
@@ -56,10 +50,10 @@
       "name": "Exact Confidence Intervals for Poisson Signals with Unknown Background",
       "startDate": "2025-09-01",
       "endDate": null,
-      "summary": "For Poisson signals with an unknown background, developed an exact interval method combining the h-function, Poisson quantile truncation, and Berger-Boos correction.",
+      "summary": "Developed an exact confidence-interval method for Poisson signals with unknown backgrounds by combining the h-function, Poisson-quantile truncation, and the Berger–Boos correction.",
       "responsibilities": [
-        "Compared coverage and interval length in simulations and analyzed KARMEN neutrino-detection data.",
-        "Led initial manuscript drafting, simulations, method implementation, and efficiency optimization."
+        "Compared interval coverage and length through simulation studies and analyzed KARMEN neutrino-detection data.",
+        "Led the simulations, method implementation, efficiency optimization, and initial manuscript drafting."
       ],
       "skills": ["Statistical Inference", "Interval Estimation", "R"]
     }
@@ -73,7 +67,7 @@
       "logoMode": "crop-left",
       "area": "Applied Statistics",
       "studyType": "M.S.",
-      "degree": "M.S. in Applied Statistics (recommended admission)"
+      "degree": "M.S. in Applied Statistics (admitted through recommendation)"
     },
     {
       "institution": "Guangzhou University",
@@ -153,6 +147,7 @@
       "name": "SimForge-GPU: AI-Assisted GPU Migration and Validation for Statistical Simulations",
       "image": "simforge-gpu-icon.png",
       "isActive": true,
+      "description": "A local GPU migration tool for AI coding assistants and statistical simulation programs. It analyzes a script and creates a conversion plan, then conservatively rewrites supported CPU code to run on a GPU. It also reports unsupported features, validation results, and benchmark results.",
       "url": "https://github.com/01seven/simforge-gpu",
       "github": "https://github.com/01seven/simforge-gpu"
     }

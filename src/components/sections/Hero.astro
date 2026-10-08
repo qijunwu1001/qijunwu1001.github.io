@@ -7,8 +7,8 @@ import GitHub from "@/icons/GitHub.astro";
 import WorldMap from "@/icons/WorldMap.astro";
 import type { SocialIcon } from "@/types";
 
-const { basics, cvHref, cvLabel, emailLabel, portraitLabel } = Astro.props;
-const { name, image, location, email } = basics;
+const { basics, cvHref, cvLabel, emailLabel, websiteLabel, portraitLabel } = Astro.props;
+const { name, image, location, email, url } = basics;
 const profiles = basics.profiles as Array<{ network: string; username: string; url: string }>;
 const { city, region } = location ?? {};
 const imageSrc = image && (image.startsWith("http") ? image : `${import.meta.env.BASE_URL}${image.replace(/^\/+/, "")}`);
@@ -20,7 +20,8 @@ const SOCIAL_ICONS: SocialIcon = {
 };
 
 const profileLabels = profiles.map(({ network, username }) => network === "GitHub" ? `github.com/${username}` : `${network}: ${username}`);
-const printInfo = [email, ...profileLabels].filter(Boolean).join(" • ");
+const websiteHost = url?.replace(/^https?:\/\//, "").replace(/\/$/, "");
+const printInfo = [email, websiteHost, ...profileLabels].filter(Boolean).join(" • ");
 ---
 
 <Section>
@@ -37,6 +38,12 @@ const printInfo = [email, ...profileLabels].filter(Boolean).join(" • ");
 					<a href={`mailto:${email}`} title={`${emailLabel}: ${email}`} class="contact-link">
 						<Mail />
 						<span>{email}</span>
+					</a>
+				)}
+				{url && (
+					<a href={url} title={`${websiteLabel}: ${websiteHost}`} aria-label={`${websiteLabel}: ${websiteHost}`} class="contact-link" target="_blank" rel="noopener noreferrer">
+						<WorldMap />
+						<span>{websiteHost}</span>
 					</a>
 				)}
 				{

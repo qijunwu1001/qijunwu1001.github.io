@@ -29,6 +29,7 @@ const ui = isChinese
 		viewProject: "查看项目",
 		viewResume: "查看中文简历 PDF",
 		email: "电子邮件",
+		website: "个人主页",
 		portrait: "个人照片",
 		certificate: "证书",
 		sections: [
@@ -54,6 +55,7 @@ const ui = isChinese
 		viewProject: "View project",
 		viewResume: "View Resume PDF",
 		email: "Email",
+		website: "Personal website",
 		portrait: "Portrait",
 		certificate: "Certificates",
 		sections: [
@@ -71,7 +73,7 @@ const ui = isChinese
 <Layout title={ui.siteTitle} summary={basics.summary} theme={basics.theme} image={basics.image} lang={locale}>
 	<main class="relative mx-auto grid max-w-6xl gap-12 p-8 max-sm:py-10 lg:h-screen lg:grid-cols-6 lg:gap-12 lg:overflow-hidden lg:px-12 lg:py-8 xl:gap-16 print:h-auto print:max-w-none print:grid-cols-1 print:gap-6 print:overflow-visible">
 		<aside class="space-y-6 lg:col-span-2 lg:flex lg:h-full lg:flex-col lg:justify-center lg:pl-6 lg:translate-x-16 lg:-translate-y-7 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0 print:translate-x-0 print:translate-y-0">
-			<Hero basics={basics} cvHref={`${base}${isChinese ? "resume_zh.pdf" : "resume_en.pdf"}`} cvLabel={ui.viewResume} emailLabel={ui.email} portraitLabel={ui.portrait}>
+			<Hero basics={basics} cvHref={`${base}${isChinese ? "resume_zh.pdf" : "resume_en.pdf"}`} cvLabel={ui.viewResume} emailLabel={ui.email} websiteLabel={ui.website} portraitLabel={ui.portrait}>
 				<LanguageSwitcher locale={locale} />
 			</Hero>
 			<SidebarNav sections={ui.sections} contentsLabel={ui.contents} />
@@ -79,7 +81,7 @@ const ui = isChinese
 		<div data-resume-content class="resume-content min-w-0 space-y-8 lg:col-span-4 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:scroll-smooth lg:py-2 lg:pr-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0 print:overflow-visible">
 			<About aboutMe={basics.aboutMe} title={ui.about} />
 			<Education education={cv.education} certificates={cv.certificates} title={ui.education} certificateTitle={ui.certificate} logoLabel={isChinese ? "校徽" : "logo"} />
-			<Experience work={cv.work} title={ui.research} className="print:col-span-3" />
+			<Experience work={cv.work} title={ui.research} locale={locale} className="print:col-span-3" />
 			<Publications publications={cv.publications} manuscriptsUnderReview={cv.manuscriptsUnderReview} manuscriptsFirst={true} title={ui.publications} />
 			<Projects projects={cv.projects} title={ui.projects} viewLabel={ui.viewProject} />
 			<Skills skills={cv.skills} title={ui.skills} />
